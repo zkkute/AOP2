@@ -1,5 +1,6 @@
 app:
   metrics:
-    time-limit: 1000  # Лимит времени в миллисекундах
-  cache:
-    time-to-live: 300 # Время жизни кэша в секундах
+    time-limit: 1000
+    kafka-topic: t1_demo_metrics
+  datasource:
+    kafka-topic: t1_demo_metrics
