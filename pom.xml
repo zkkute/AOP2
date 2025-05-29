@@ -53,7 +53,7 @@
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
-            <version>3.0.0</version> <!-- или подходит под вашу версию Spring Boot -->
+            <version>3.0.0</version> <!-- Убедитесь, что версия совместима с вашей версией Spring Boot -->
         </dependency>
 
         <!-- H2 Database (для тестирования) -->
