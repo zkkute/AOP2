@@ -1,0 +1,7 @@
+{
+  "clientId": "client-123",
+  "accountId": "acc-456",
+  "transactionId": "tx-789",
+  "amount": "100.50",
+  "timestamp": "2023-10-05T12:34:56"
+}

@@ -1,4 +1,5 @@
 package org.example.aspect;
+
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -35,12 +36,11 @@ public class LogDatasourceErrorAspect {
             String message = "Data source error in method " + methodName + ": " + errorMessage;
 
             try {
-                kafkaTemplate.execute(operations -> {
-                    ProducerRecord<String, String> record = new ProducerRecord<>(kafkaTopic, message);
-                    operations.send(record);
-                    return null;
-                });
+                // Отправка в Kafka
+                ProducerRecord<String, String> record = new ProducerRecord<>(kafkaTopic, message);
+                kafkaTemplate.send(record);
             } catch (Exception kafkaError) {
+                // Логирование в БД
                 DataSourceErrorLog logEntry = new DataSourceErrorLog();
                 logEntry.setMethodName(methodName);
                 logEntry.setErrorMessage(errorMessage);

@@ -3,6 +3,7 @@ package org.example.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class CachingAspect {
 
     private final Map<CacheKey, CacheValue> cache = new ConcurrentHashMap<>();
 
-    @Around("@annotation(Cached)")
+    @Before("@annotation(Cached)")
     public Object cacheResult(ProceedingJoinPoint joinPoint) throws Throwable {
         CacheKey key = generateKey(joinPoint);
         CacheValue cachedValue = cache.get(key);
