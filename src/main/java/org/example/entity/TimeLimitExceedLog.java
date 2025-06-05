@@ -12,6 +12,7 @@ public class TimeLimitExceedLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String methodName;
     private long executionTime;
     private Date timestamp;

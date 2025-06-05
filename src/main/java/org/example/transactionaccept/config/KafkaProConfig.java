@@ -13,9 +13,9 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
+@Configuration("transactionKafkaConfig")
 @EnableKafka
-public class KafkaConfig {
+public class KafkaProConfig {
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, TransactionAcceptRequest> transactionAcceptFactory(

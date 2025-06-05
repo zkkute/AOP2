@@ -1,4 +1,5 @@
 package org.example.aspect;
+
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -29,7 +30,7 @@ public class MetricAspect {
     @Autowired
     private TimeLimitExceedLogRepository repository;
 
-    @Around("@annotation(Metric)")
+    @Around("@annotation(org.example.annotations.Metric)")
     public Object measureExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         Object result = joinPoint.proceed();

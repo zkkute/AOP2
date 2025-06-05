@@ -1,5 +1,6 @@
 package org.example.aspect;
 
+import org.example.annotations.LogDatasourceError;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,6 +10,7 @@ import org.example.repository.DataSourceErrorLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -21,12 +23,12 @@ public class LogDatasourceErrorAspect {
     private String kafkaTopic;
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
     @Autowired
     private DataSourceErrorLogRepository repository;
 
-    @Around("@annotation(LogDatasourceError)")
+    @Around("@annotation(org.example.annotations.LogDatasourceError)")
     public Object logDataSourceError(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             return joinPoint.proceed();
@@ -38,7 +40,7 @@ public class LogDatasourceErrorAspect {
             try {
                 // Отправка в Kafka
                 ProducerRecord<String, String> record = new ProducerRecord<>(kafkaTopic, message);
-                kafkaTemplate.send(record);
+                kafkaTemplate.send((Message<?>) record);
             } catch (Exception kafkaError) {
                 // Логирование в БД
                 DataSourceErrorLog logEntry = new DataSourceErrorLog();

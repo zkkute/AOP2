@@ -1,5 +1,7 @@
 package org.example.aspect;
 
+
+import org.example.annotations.Cached;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,7 +23,7 @@ public class CachingAspect {
 
     private final Map<CacheKey, CacheValue> cache = new ConcurrentHashMap<>();
 
-    @Before("@annotation(Cached)")
+    @Around("@annotation(org.example.annotations.Cached)")
     public Object cacheResult(ProceedingJoinPoint joinPoint) throws Throwable {
         CacheKey key = generateKey(joinPoint);
         CacheValue cachedValue = cache.get(key);

@@ -7,7 +7,12 @@ import java.util.Date;
 
 @Entity
 public class DataSourceErrorLog {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
     private String methodName;
     private String errorMessage;
     private Date timestamp;

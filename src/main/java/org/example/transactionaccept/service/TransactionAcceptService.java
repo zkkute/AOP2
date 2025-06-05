@@ -37,7 +37,7 @@ public class TransactionAcceptService {
         String cacheKey = request.getClientId() + ":" + request.getAccountId();
         Cache cache = cacheManager.getCache("transactionHistory");
 
-        List<LocalDateTime> timestamps = cache.getIfPresent(cacheKey);
+        List<LocalDateTime> timestamps = cache.get(cacheKey, List.class);
         if (timestamps == null) {
             timestamps = new ArrayList<>();
         }

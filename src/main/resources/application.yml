@@ -4,6 +4,8 @@ app:
     kafka-topic: t1_demo_metrics
   datasource:
     kafka-topic: t1_demo_metrics
+  cache:
+    time-to-live: 30
 
 spring:
   kafka:
@@ -23,3 +25,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
