@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import org.example.enums.AccountStatus;
 
 @Entity
 public class Client {
@@ -12,15 +13,17 @@ public class Client {
     @Column(unique = true, nullable = false)
     private String clientId;
 
-    // Конструкторы
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AccountStatus status = AccountStatus.OPEN;
 
     public Client() {}
 
-    public Client(String clientId) {
+    public Client(String clientId, AccountStatus status) {
         this.clientId = clientId;
+        this.status = status;
     }
-
-    // Геттеры и сеттеры
 
     public Long getId() {
         return id;
@@ -36,5 +39,13 @@ public class Client {
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
+    }
+
+    public AccountStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AccountStatus status) {
+        this.status = status;
     }
 }
