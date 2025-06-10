@@ -25,7 +25,7 @@ public class LogDatasourceErrorAspect {
     @Autowired
     private DataSourceErrorLogRepository repository;
 
-    @Around("@annotation(LogDatasourceError)")
+    @Around("@annotation(org.example.annotations.LogDatasourceError)")
     public Object logDataSourceError(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             return joinPoint.proceed();
@@ -35,12 +35,11 @@ public class LogDatasourceErrorAspect {
             String message = "Data source error in method " + methodName + ": " + errorMessage;
 
             try {
-                kafkaTemplate.execute(operations -> {
-                    ProducerRecord<String, String> record = new ProducerRecord<>(kafkaTopic, message);
-                    operations.send(record);
-                    return null;
-                });
+                // Отправляем сообщение в Kafka
+                ProducerRecord<String, String> record = new ProducerRecord<>(kafkaTopic, message);
+                kafkaTemplate.send(record);
             } catch (Exception kafkaError) {
+                // Если отправка в Kafka не удалась — сохраняем в БД
                 DataSourceErrorLog logEntry = new DataSourceErrorLog();
                 logEntry.setMethodName(methodName);
                 logEntry.setErrorMessage(errorMessage);
@@ -48,7 +47,7 @@ public class LogDatasourceErrorAspect {
                 repository.save(logEntry);
             }
 
-            throw e; // Перебросить исключение
+            throw e; // Перебрасываем исходное исключение дальше
         }
     }
 }

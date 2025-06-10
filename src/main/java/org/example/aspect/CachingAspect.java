@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.Date;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 
 @Aspect
 @Component
@@ -20,11 +19,7 @@ public class CachingAspect {
 
     private final Map<CacheKey, CacheValue> cache = new ConcurrentHashMap<>();
 
-<<<<<<< HEAD
     @Around("@annotation(org.example.annotations.Cached)")
-=======
-    @Around("@annotation(Cached)")
->>>>>>> cffc1cf01283d007f34d324665eef2bc27b5ae50
     public Object cacheResult(ProceedingJoinPoint joinPoint) throws Throwable {
         CacheKey key = generateKey(joinPoint);
         CacheValue cachedValue = cache.get(key);

@@ -24,16 +24,12 @@
     </properties>
 
     <dependencies>
-<<<<<<< HEAD
-=======
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.28</version>
             <scope>provided</scope>
         </dependency>
->>>>>>> cffc1cf01283d007f34d324665eef2bc27b5ae50
         <!-- Spring Boot Core -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -52,8 +48,6 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-<<<<<<< HEAD
-=======
         <!-- Spring Kafka -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
@@ -61,20 +55,11 @@
             <version>3.0.0</version> <!-- Убедитесь, что версия совместима с вашей версией Spring Boot -->
         </dependency>
 
->>>>>>> cffc1cf01283d007f34d324665eef2bc27b5ae50
         <!-- H2 Database (для тестирования) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
-        </dependency>
-
-        <!-- Lombok (для упрощения кода) -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.28</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- Spring Boot Configuration Processor -->
@@ -90,15 +75,6 @@
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
-<<<<<<< HEAD
-        <!-- Spring Kafka -->
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
-
-=======
->>>>>>> cffc1cf01283d007f34d324665eef2bc27b5ae50
         <!-- JSON Processing (Jackson) -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -120,7 +96,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -130,6 +105,9 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <mainClass>org.example.DemoApplication</mainClass>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
