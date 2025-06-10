@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import org.example.kafka.KafkaProducerService;
 
 @Aspect
 @Component
@@ -17,6 +18,9 @@ public class MetricAspect {
 
     @Value("${app.metrics.time-limit}")
     private long timeLimit;
+
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
     @Autowired
     private TimeLimitExceedLogRepository repository;
@@ -29,12 +33,20 @@ public class MetricAspect {
 
         if (duration > timeLimit) {
             String methodName = joinPoint.getSignature().getName();
-            TimeLimitExceedLog logEntry = new TimeLimitExceedLog(
-                    methodName,
-                    duration,
-                    new Date()
-            );
-            repository.save(logEntry);
+
+            // Подготовка данных
+            String message = String.format("Method '%s' exceeded time limit: %d ms", methodName, duration);
+            String timestampStr = new Date().toString();
+
+            try {
+                // Попытка отправить в Kafka
+                kafkaProducerService.sendMessage("t1_demo_metrics", message, "METRICS");
+            } catch (Exception ex) {
+                // Логируем и пишем в БД как fallback
+                System.err.println("Failed to send to Kafka: " + ex.getMessage());
+                TimeLimitExceedLog logEntry = new TimeLimitExceedLog(methodName, duration, new Date());
+                repository.save(logEntry);
+            }
         }
 
         return result;
