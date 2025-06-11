@@ -3,19 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.example</groupId>
-    <artifactId>AOP_2</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-
-    <!-- Родительский проект Spring Boot -->
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.3</version>
-        <relativePath/>
+        <groupId>org.example</groupId>
+        <artifactId>AOP_2</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
+
+    <artifactId>application</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -24,17 +18,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <modules>
-        <module>application</module>
-        <module>custom-starter</module>
-    </modules>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2023.0.1</version>
+                <version>2023.0.0</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -55,12 +44,17 @@
         </dependency>
 
         <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>custom-starter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
-
         <!-- Spring Boot Core -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -112,7 +106,6 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -120,34 +113,33 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <!-- Maven Compiler Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                        <configuration>
-                            <mainClass>org.example.DemoApplication</mainClass>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+    <plugins>
+    <!-- Maven Compiler Plugin -->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+            <source>17</source>
+            <target>17</target>
+            <encoding>UTF-8</encoding>
+        </configuration>
+    </plugin>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                    <configuration>
+                        <mainClass>application.scr.main.java.org.example.DemoApplication</mainClass>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
     </build>
 </project>
