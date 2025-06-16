@@ -28,3 +28,6 @@ management:
   endpoint:
     metrics:
       enabled: true
+
+server:
+  port: 0 # RANDOM PORT

@@ -44,11 +44,11 @@ public class CachingAspect {
     }
 
     // Вспомогательные классы
-    private static class CacheKey {
+    public static class CacheKey {
         private final String methodName;
         private final Object[] arguments;
 
-        CacheKey(String methodName, Object[] arguments) {
+        public CacheKey(String methodName, Object[] arguments) {
             this.methodName = methodName;
             this.arguments = arguments;
         }
@@ -69,7 +69,7 @@ public class CachingAspect {
         }
     }
 
-    private static class CacheValue {
+    public static class CacheValue {
         Object value;
         long timestamp;
 
