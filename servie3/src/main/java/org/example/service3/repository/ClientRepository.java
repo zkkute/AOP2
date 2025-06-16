@@ -1,14 +1,10 @@
-package org.example.repository;
+package org.example.service3.repository;
 
-import org.example.entity.Client;
+import org.example.service3.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
-@Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
     Optional<Client> findByClientId(String clientId);
-    List<Client> findTopNBlocked(int n);
 }

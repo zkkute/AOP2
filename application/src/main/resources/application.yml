@@ -3,6 +3,13 @@ app:
     time-limit: 1000  # Лимит времени в миллисекундах
   cache:
     time-to-live: 300 # Время жизни кэша в секундах
+  service3:
+    url: http://localhost:8083
+    unlock-task:
+      client-batch-size: 5
+      account-batch-size: 10
+      interval-ms-client: 60000   # 1 минута
+      interval-ms-account: 120000 # 2 минуты
 
     time-limit: 1000
     kafka-topic: t1_demo_metrics
@@ -12,3 +19,12 @@ app:
 spring:
   main:
     allow-bean-definition-overriding: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    metrics:
+      enabled: true

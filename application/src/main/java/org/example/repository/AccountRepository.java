@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByAccountId(String accountId);
-    List<Account> findByClientId(String clientId); // если используется
+    List<Account> findByClientId(String clientId);
+    List<Account> findTopNArrested(int n);// если используется
 }

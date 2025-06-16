@@ -27,6 +27,7 @@
     <modules>
         <module>application</module>
         <module>custom-starter</module>
+        <module>servie3</module>
     </modules>
 
     <dependencyManagement>
@@ -47,6 +48,11 @@
             <artifactId>lombok</artifactId>
             <version>1.18.28</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <dependency>
